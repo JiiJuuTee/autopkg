@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Description</key>
+        <string>Downloads the latest version of EndNote21 and imports it into Munki.</string>
+        <key>Identifier</key>
+        <string>com.github.JiiJuuTee.munki.EndNote21</string>
+        <key>Input</key>
+        <dict>
+            <key>DERIVE_MIN_OS</key>
+            <string/>
+            <key>APP_FILENAME</key>
+            <string>EndNote21</string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>apps/%NAME%</string>
+            <key>NAME</key>
+            <string>EndNote21</string>
+            <key>DISPLAY_NAME</key>
+            <string>EndNote 21</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>blocking_applications</key>
+                <array>
+                    <string>EndNote21.app</string>
+                    <string>Microsoft Word</string>
+                </array>
+                <key>catalogs</key>
+                <array>
+                    <string>testing</string>
+                </array>
+                <key>description</key>
+                <string>EndNote 21, the world’s essential reference management tool, helps you save time, stay organized, collaborate with colleagues, and ultimately, get published. So, you can focus on what matters most: your ideas.</string>
+                <key>developer</key>
+                <string>Clarivate</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true/>
+                <key>postinstall_script</key>
+                <string>#!/bin/zsh
+# Installing CWYW Bundles
+
+DIR="EndNote CWYW Word 16.bundle"
+PATH_SRC="/Applications/EndNote 21/Cite While You Write/$DIR"
+PATH_DEST="/Library/Application Support/Microsoft/Office365/User Content.localized/Startup.localized/Word/"
+
+[[ -d "$PATH_DEST" ]] || mkdir -p "$PATH_DEST"
+if [ -d "$PATH_SRC" ]
+then
+    echo "Copying $DIR to $PATH_DEST"
+    cp -r "$PATH_SRC" "$PATH_DEST"
+else
+    echo "Error: Directory $PATH_SRC does not exists."
+fi
+			</string>
+                <key>postuninstall_script</key>
+                <string>#!/bin/zsh
+APP_PATH="/Applications/EndNote 21"
+DIR="EndNote CWYW Word 16.bundle"
+PATH_DEST="/Library/Application Support/Microsoft/Office365/User Content.localized/Startup.localized/Word/$DIR"
+
+if [ -d "$PATH_DEST" ]
+then
+    echo "Removing $PATH_DEST"
+    rm -r "$PATH_DEST"
+fi
+
+if [ -d "$APP_PATH" ]
+then
+	echo "Removing $APP_PATH"
+	rm -rf "$APP_PATH"
+fi
+			</string>
+                <key>preinstall_script</key>
+                <string>#!/bin/zsh
+endnote_bundle_2008="/Applications/Microsoft Office 2008/Office/Startup/Word/EndNote CWYW Word 2008.bundle"
+endnote_bundle_2011="/Applications/Microsoft Office 2011/Office/Startup/Word/EndNote CWYW Word 2011.bundle"
+endnote_bundle_2016="/Library/Application Support/Microsoft/Office365/User Content.localized/Startup.localized/Word/EndNote CWYW Word 2016.bundle"
+
+bundles=("$endnote_bundle_2008" "$endnote_bundle_2011" "$endnote_bundle_2016")
+
+for i in $bundles; do
+  if [ -d "$i" ]
+  then
+    echo "Removing old CWYW bundle $i"
+    rm -r "$i"
+  else
+    echo "$i is not installed"
+    echo "Proceeding with installation"
+  fi
+done
+			</string>
+            </dict>
+        </dict>
+        <key>MinimumVersion</key>
+        <string>1.0.0</string>
+        <key>ParentRecipe</key>
+        <string>com.github.rtrouton.download.EndNote21</string>
+        <key>Process</key>
+        <array>
+            <dict>
+                <key>Processor</key>
+                <string>Copier</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>source_path</key>
+                    <string>%pathname%/Install EndNote 21.app/Contents/Resources/EndNote.zip</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/EndNote.zip</string>
+                    <key>purge_destination</key>
+                    <true/>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>Unarchiver</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>archive_path</key>
+                    <string>%RECIPE_CACHE_DIR%/EndNote.zip</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/Applications</string>
+                    <key>purge_destination</key>
+                    <true/>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>Versioner</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>input_plist_path</key>
+                    <string>%RECIPE_CACHE_DIR%/Applications/EndNote/EndNote 21.app/Contents/Info.plist</string>
+                    <key>plist_version_key</key>
+                    <string>CFBundleShortVersionString</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>PkgRootCreator</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkgdirs</key>
+                    <dict>
+                        <key>Applications</key>
+                        <string>0775</string>
+                    </dict>
+                    <key>pkgroot</key>
+                    <string>%RECIPE_CACHE_DIR%/pkgroot</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>Copier</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/pkgroot/Applications/EndNote</string>
+                    <key>source_path</key>
+                    <string>%RECIPE_CACHE_DIR%/Applications/EndNote</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>FileMover</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>source</key>
+                    <string>%RECIPE_CACHE_DIR%/pkgroot/Applications/EndNote</string>
+                    <key>target</key>
+                    <string>%RECIPE_CACHE_DIR%/pkgroot/Applications/EndNote 21</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>PkgCreator</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_request</key>
+                    <dict>
+                        <key>chown</key>
+                        <array>
+                            <dict>
+                                <key>group</key>
+                                <string>admin</string>
+                                <key>path</key>
+                                <string>Applications</string>
+                                <key>user</key>
+                                <string>root</string>
+                            </dict>
+                        </array>
+                        <key>id</key>
+                        <string>com.endnote.EndNote21.pkg</string>
+                        <key>pkgname</key>
+                        <string>EndNote-%version%</string>
+                        <key>pkgroot</key>
+                        <string>%RECIPE_CACHE_DIR%/pkgroot</string>
+                        <key>pkgtype</key>
+                        <string>flat</string>
+                        <key>version</key>
+                        <string>%version%</string>
+                    </dict>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>MunkiInstallsItemsCreator</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>faux_root</key>
+                    <string>%RECIPE_CACHE_DIR%</string>
+                    <key>installs_item_paths</key>
+                    <array>
+                        <string>/Applications/EndNote/EndNote 21.app</string>
+                    </array>
+                    <key>version_comparison_key</key>
+                    <string>CFBundleShortVersionString</string>
+                    <key>derive_minimum_os_version</key>
+                    <string>%DERIVE_MIN_OS%</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>MunkiPkginfoMerger</string>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>MunkiImporter</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_path</key>
+                    <string>%RECIPE_CACHE_DIR%/EndNote-%version%.pkg</string>
+                    <key>repo_subdirectory</key>
+                    <string>%MUNKI_REPO_SUBDIR%</string>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>PathDeleter</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>path_list</key>
+                    <array>
+                        <string>%RECIPE_CACHE_DIR%/Applications</string>
+                        <string>%RECIPE_CACHE_DIR%/EndNote.zip</string>
+                        <string>%RECIPE_CACHE_DIR%/pkgroot</string>
+                        <string>%RECIPE_CACHE_DIR%/EndNote-%version%.pkg</string>
+                    </array>
+                </dict>
+            </dict>
+        </array>
+    </dict>
+</plist>
