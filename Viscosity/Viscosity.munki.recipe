@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Imports latest version of Viscosity to your Munki repo.</string>
+	<key>Identifier</key>
+	<string>com.github.JiiJuuTee.munki.Viscosity</string>
+	<key>Input</key>
+	<dict>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps</string>
+        <key>NAME</key>
+        <string>Viscosity</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>Viscosity is a first class OpenVPN client that lets you secure your network with ease and style</string>
+            <key>display_name</key>
+            <string>%NAME%</string>
+            <key>name</key>
+            <string>%NAME%</string>
+            <key>unattended_install</key>
+            <true/>
+            <key>developer</key>
+			<string>SparkLabs</string>
+            <key>postinstall_script</key>
+	<string>#!/bin/sh
+#
+# Installs the Viscosity helper (https://www.sparklabs.com/forum/viewtopic.php?t=1633)
+#
+
+if [ -f "/Applications/Viscosity.app/Contents/MacOS/Viscosity" ]
+then
+    /bin/echo "Found Viscosity.app, installing helper tools..."
+    /bin/echo
+    /Applications/Viscosity.app/Contents/MacOS/Viscosity -installHelperTool YES 2&gt;&amp;1
+    /bin/echo
+fi</string>
+
+        </dict>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>1.0</string>
+    <key>ParentRecipe</key>
+    <string>com.github.JiiJuuTee.download.Viscosity</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+        </dict>
+    </array>
+</dict>
+</plist>
