@@ -5,7 +5,7 @@
         <key>Description</key>
         <string>Downloads the latest version of Office-Reset and imports it into Munki.</string>
         <key>Identifier</key>
-        <string>fi.helsinki.it.scm.tike-mac.repos.autopkg-recipes.munki.office-reset</string>
+        <string>com.github.JiiJuuTee.munki.office-reset</string>
         <key>Input</key>
         <dict>
             <!--NAME THESE VARIABLES IN YOUR OVERDRIVE-->
