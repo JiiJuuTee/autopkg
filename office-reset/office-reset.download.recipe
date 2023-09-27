@@ -5,7 +5,7 @@
         <key>Description</key>
         <string>Downloads the latest version of Office-Reset for macOS.</string>
         <key>Identifier</key>
-        <string>fi.helsinki.it.scm.tike-mac.repos.autopkg-recipes.download.office-reset</string>
+        <string>com.github.JiiJuuTee.download.office-reset</string>
         <key>Input</key>
         <dict>
             <key>NAME</key>
