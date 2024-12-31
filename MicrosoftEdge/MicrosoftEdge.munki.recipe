@@ -38,8 +38,8 @@
     <string>2.7</string>
     <key>Process</key>
     <array>
-    	<dict>
-        	<key>Processor</key>
+        <dict>
+            <key>Processor</key>
             <string>PkgRootCreator</string>
             <key>Arguments</key>
             <dict>
@@ -53,7 +53,7 @@
             </dict>
         </dict>
        <dict>
-       		<key>Processor</key>
+            <key>Processor</key>
             <string>FlatPkgUnpacker</string>
             <key>Arguments</key>
             <dict>
@@ -64,7 +64,7 @@
             </dict>
         </dict>
         <dict>
-        	<key>Processor</key>
+            <key>Processor</key>
             <string>FileFinder</string>
             <key>Arguments</key>
             <dict>
@@ -84,7 +84,7 @@
             </dict>
          </dict>
          <dict>
-         	<key>Processor</key>
+            <key>Processor</key>
             <string>Versioner</string>
             <key>Arguments</key>
             <dict>
@@ -106,7 +106,7 @@
             </dict>
          </dict>
          <dict>
-         	<key>Processor</key>
+            <key>Processor</key>
             <string>MunkiInstallsItemsCreator</string>
             <key>Arguments</key>
             <dict>
@@ -125,7 +125,7 @@
             <string>MunkiPkginfoMerger</string>
         </dict>
         <dict>
-        	<key>Processor</key>
+            <key>Processor</key>
             <string>MunkiImporter</string>
             <key>Arguments</key>
             <dict>
