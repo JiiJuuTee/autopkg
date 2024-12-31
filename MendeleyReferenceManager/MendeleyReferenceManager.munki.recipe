@@ -45,7 +45,7 @@
                <string>%RECIPE_CACHE_DIR%/downloads/*mendeley-reference-manager*.dmg</string>
             </dict>          
          </dict>
-		<dict>
+	<dict>
 	    <key>Processor</key>
             <string>MunkiImporter</string>
             <key>Arguments</key>
