@@ -73,7 +73,7 @@
             </dict>          
          </dict>
          <dict>
-         <key>Processor</key>
+            <key>Processor</key>
             <string>PkgPayloadUnpacker</string>
             <key>Arguments</key>
             <dict>
