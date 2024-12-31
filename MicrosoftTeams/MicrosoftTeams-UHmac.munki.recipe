@@ -60,10 +60,10 @@
                 <key>flat_pkg_path</key>
                 <string>%pathname%</string>
             </dict>
-			<key>Processor</key>
+            <key>Processor</key>
             <string>FlatPkgUnpacker</string>
         </dict> 
-		<dict>
+        <dict>
             <key>Arguments</key>
             <dict>
                 <key>destination_path</key>
@@ -71,7 +71,7 @@
                 <key>pkg_payload_path</key>
                 <string>%RECIPE_CACHE_DIR%/expanded/Teams_osx_app.pkg/Payload</string>
             </dict>
-			<key>Processor</key>
+            <key>Processor</key>
             <string>PkgPayloadUnpacker</string>
         </dict>
         <dict>
@@ -82,10 +82,10 @@
                 <key>pkg_payload_path</key>
                 <string>%RECIPE_CACHE_DIR%/expanded/MSTeamsAudioDevice.pkg/Payload</string>
             </dict>
-			<key>Processor</key>
+            <key>Processor</key>
             <string>PkgPayloadUnpacker</string>
         </dict>
-		<dict>
+        <dict>
             <key>Arguments</key>
             <dict>
                 <key>installs_item_paths</key>
@@ -101,7 +101,7 @@
             <key>Processor</key>
             <string>MunkiInstallsItemsCreator</string>
         </dict>
-		<dict>
+        <dict>
             <key>Processor</key>
             <string>MunkiPkginfoMerger</string>
         </dict>
@@ -145,7 +145,7 @@
                 <key>path_list</key>
                 <array>
                     <string>%RECIPE_CACHE_DIR%/expanded/</string>  
-                    <string>%RECIPE_CACHE_DIR%/unpack/</string>                      
+                    <string>%RECIPE_CACHE_DIR%/unpack/</string>  
                 </array>
             </dict>
             <key>Processor</key>
