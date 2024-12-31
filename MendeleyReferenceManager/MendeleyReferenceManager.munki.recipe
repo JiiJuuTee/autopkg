@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads the latest Mendeley Reference Manager and imports it into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.JiiJuuTee.mendeleyreferencemanager</string>
+    <key>ParentRecipe</key>
+    <string>com.github.grahampugh.recipes.download.MendeleyReferenceManager</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>Mendeley Reference Manager</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>free/mendeley</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>Mendeley Reference Manager</string>
+            <key>display_name</key>
+            <string>Mendeley Reference Manager</string>
+            <key>developer</key>
+            <string>Elsevier</string>
+            <key>category</key>
+            <string>Productivity</string>
+            <key>name</key>
+            <string>%NAME%</string>
+        </dict>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>2.7</string>
+    <key>Process</key>
+    <array>
+    	<dict>
+        <key>Processor</key>
+            <string>FileFinder</string>
+            <key>Arguments</key>
+            <dict>
+               <key>pattern</key>
+               <string>%RECIPE_CACHE_DIR%/downloads/*mendeley-reference-manager*.dmg</string>
+            </dict>          
+         </dict>
+		<dict>
+	    <key>Processor</key>
+            <string>MunkiImporter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%found_filename%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>PathDeleter</string>
+            <key>Arguments</key>
+            <dict>
+               <key>path_list</key>
+               <array>
+                  <string>%RECIPE_CACHE_DIR%/downloads</string>
+               </array>
+            </dict>
+         </dict>
+    </array>
+</dict>
+</plist>
+
