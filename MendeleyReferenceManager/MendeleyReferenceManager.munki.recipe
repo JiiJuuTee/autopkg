@@ -36,17 +36,17 @@
     <string>2.7</string>
     <key>Process</key>
     <array>
-    	<dict>
-        <key>Processor</key>
+        <dict>
+            <key>Processor</key>
             <string>FileFinder</string>
             <key>Arguments</key>
             <dict>
                <key>pattern</key>
                <string>%RECIPE_CACHE_DIR%/downloads/*mendeley-reference-manager*.dmg</string>
-            </dict>          
+            </dict> 
          </dict>
-	<dict>
-	    <key>Processor</key>
+        <dict>
+            <key>Processor</key>
             <string>MunkiImporter</string>
             <key>Arguments</key>
             <dict>
