@@ -97,6 +97,8 @@
                 <string>%RECIPE_CACHE_DIR%/unpack/root</string>
                 <key>version_comparison_key</key>
                 <string>CFBundleShortVersionString</string>
+                <key>derive_minimum_os_version</key>
+                <string>YES</string>
             </dict>
             <key>Processor</key>
             <string>MunkiInstallsItemsCreator</string>
