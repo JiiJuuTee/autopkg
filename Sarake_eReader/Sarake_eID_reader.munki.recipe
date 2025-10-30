@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads the latest Sarake eID reader installer and imports into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.JiiJuuTee.Sarake_eID_reader</string>
+    <key>ParentRecipe</key>
+    <string>com.github.JiiJuuTee.Sarake_eID_reader</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>Sarake_eID_Reader</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/sarake_eid_reader</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>Sarake eID Reader software is used for the electronic signing of degree certificates.</string>
+            <key>display_name</key>
+            <string>Sarake eID Reader</string>
+            <key>developer</key>
+            <string>Sarake</string>
+            <key>category</key>
+            <string>Utility</string>
+            <key>name</key>
+            <string>%NAME%</string>
+        </dict>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>2.7.0</string>
+    <key>Process</key>
+    <array>
+        <dict>
+        <key>Processor</key>
+            <string>MunkiImporter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
