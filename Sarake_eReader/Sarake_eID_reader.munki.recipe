@@ -5,9 +5,9 @@
     <key>Description</key>
     <string>Downloads the latest Sarake eID reader installer and imports into Munki.</string>
     <key>Identifier</key>
-    <string>com.github.JiiJuuTee.Sarake_eID_reader</string>
+    <string>com.github.JiiJuuTee.munki.Sarake_eID_reader</string>
     <key>ParentRecipe</key>
-    <string>com.github.JiiJuuTee.Sarake_eID_reader</string>
+    <string>com.github.JiiJuuTee.download.Sarake_eID_reader</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
